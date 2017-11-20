@@ -1,9 +1,3 @@
----
-output:
-  html_document: default
-  pdf_document: default
-  word_document: default
----
 #**Behavioral Cloning** 
 
 The goal of this project is to clone human driving behavior using a Deep Neural Network to achieve this goal, I use a simple Car Simulator provide by Udacity.

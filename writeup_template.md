@@ -1,4 +1,4 @@
-#**Behavioral Cloning** 
+# Behavioral Cloning #
 
 The goal of this project is to clone human driving behavior using a Deep Neural Network to achieve this goal, I use a simple Car Simulator provide by Udacity.
 
@@ -37,7 +37,7 @@ The goal of this project is to clone human driving behavior using a Deep Neural 
 [image19]: ./examples/valleycorrection.png
 
 
-##Exploring the Data.
+## Exploring the Data. ##
 The simulator captures images from three cameras mounted on the car: a center, right and left camera to recovering from being off-center. Track one dataset was preprocessed and trained on 29750 sample, validated on 7438 sample and Track two was preprocess and trained on 8160 samples, validated on 2040 samples .
 
 
@@ -49,9 +49,9 @@ The simulator captures images from three cameras mounted on the car: a center, r
 
 ![][image16]
 
-###Files Submitted & Code Quality
+### Files Submitted & Code Quality ###
 
-####1. Submission includes all required files and can be used to run the simulator in autonomous mode
+#### 1. Submission includes all required files and can be used to run the simulator in autonomous mode ####
   
   
 My project includes the following files:  
@@ -63,7 +63,7 @@ My project includes the following files:
 * lakesucvelocity25.mp4 and v3.mp4 vedio file for demonstrate the result.
 
 
-####2. Submission includes functional code
+#### 2. Submission includes functional code ####
 Using the Udacity provided simulator and my drive.py file which has modeified the speed to 25MPH(9MPH in track 2), the car can be driven autonomously around the track one by executing 
 ```sh
 python drive.py modelsucesslake.h5
@@ -74,13 +74,13 @@ python drive.py model.h5(For second submission)
             
 ```
 
-####3. Submission code is usable and readable
+#### 3. Submission code is usable and readable ####
 
 The model.py file contains the code for training and saving the convolution neural network. The file shows the pipeline I used for training and validating the model, and it contains comments to explain how the code works.
 
-###Model Architecture and Training Strategy
+### Model Architecture and Training Strategy ###
 
-####1. An appropriate model architecture has been employed
+#### 1. An appropriate model architecture has been employed ####
 
 My convolutional neural network architecture was inspired by NVIDIA's End to End Learning for Self-Driving Cars paper. The original Nvidia has a tenserflow version, I transfered it into Keras environment. The main difference between my model and the NVIDIA mode is than I did use drpout layers. My model consists of a convolution neural network with 3x3 filter sizes and 5 convolutional layers each one has 24 to 64 filters, strid of 2 or 1 and 5 fully connected layers (model.py lines 70-83). There are 2,712,951 total/trainable parameters came out of this model.
 The 5 convolutional layer shrink down layer by layer, because I am using the 'valid' padding, until it reach 64 then flatten the 64 layers down, get 64x1x33 = 2112 connectors. Then follow by 5 fully connected layers. The first dense layer has 1164 connectors, therefore, between flatten layer and dense_1 layer has 2112x1164+1164 = 2459532 connections. 
@@ -130,20 +130,20 @@ Non-trainable params: 0
 ____________________________________________________________________________________________________
 
 ```
-####2. Attempts to reduce overfitting in the model
+#### 2. Attempts to reduce overfitting in the model ####
 
 The model contains dropout layers in order to reduce overfitting (model.py lines 78, lines 82). 
 The model was trained and validated on different data sets to ensure that the model was not overfitting (code line 66). The model was tested by running it through the simulator and ensuring that the vehicle could stay on the track.
 
-####3. Model parameter tuning
+#### 3. Model parameter tuning ####
 
 The model used Adam optimiser to control learning rate = 1e-04 (model.py line 84).
 
-####4. Appropriate training data
+#### 4. Appropriate training data ####
 
 Training data was chosen to keep the vehicle driving on the road. I used a combination of center lane driving, recovering from the left and right sides of the road. For details about how I created the training data, see the next section. 
 
-####5. Creation of the Training Set & Training Process
+#### 5. Creation of the Training Set & Training Process ####
 
 To capture good driving behavior, I first recorded two laps( both clock and counterclockwise) on track one using center lane driving. Here is an example image of center lane driving:
 
@@ -155,12 +155,12 @@ I then recorded the vehicle recovering from the left side and right sides of the
 | :-------------: |:-------------:| :------:|
 |![alt text][image1] | ![alt text][image2] | ![alt text][image3] |
 
-####Track one
+#### Track one ####
 
 ![alt text][image17]
 ![alt text][image15]
 
-####Track two
+#### Track two ####
 
 ![alt text][image19]
 ![alt text][image18]
@@ -185,7 +185,7 @@ After the collection process, I then preprocessed this data by shuffle the train
 
 I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was 8 as evidenced by try and error approach, I used an adam optimizer the learning rate = 1e-04.
 
-####4.Result and Recommendation for Improvements
+#### 4.Result and Recommendation for Improvements ####
 
 In the initial stage of the project, I used a dataset generated by myself. That dataset was small and recorded while navigating the car using the laptop keyboard and adding steering correction from 0.1-0.3. However, the model built was not good enough to autonomously navigate the car in the simulator. I think while driving the car and keep the car on the center of the road, adding any correction might not help. It's just get worse and can't make one lap in both track so I decide to remove the steering correction part and keep the model simple. After tons of try out in track 2 like collecting more data and keep the car in the middle of the road or collected clock and counterclockwise loop or corrected steering angle, I noticed that maybe adjust Brightness of image data will be way more helpful than only correcting steering angle. After the reviwer's advice I able to correct the following steps:  
 

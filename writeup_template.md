@@ -85,7 +85,7 @@ The model.py file contains the code for training and saving the convolution neur
 My convolutional neural network architecture was inspired by NVIDIA's End to End Learning for Self-Driving Cars paper. The original Nvidia has a tenserflow version, I transfered it into Keras environment. The main difference between my model and the NVIDIA mode is than I did use drpout layers. My model consists of a convolution neural network with 3x3 filter sizes and 5 convolutional layers each one has 24 to 64 filters, strid of 2 or 1 and 5 fully connected layers(`model.py` line [70 to 83](model.py#L70-L83) ). There are 2,712,951 total/trainable parameters came out of this model.
 The 5 convolutional layer shrink down layer by layer, because I am using the 'valid' padding, until it reach 64 then flatten the 64 layers down, get 64x1x33 = 2112 connectors. Then follow by 5 fully connected layers. The first dense layer has 1164 connectors, therefore, between flatten layer and dense_1 layer has 2112x1164+1164 = 2459532 connections. 
 
-The model includes RELU layers to introduce nonlinearity (code line 70-81), and the data is normalized in the model using a Keras lambda layer, a lambda layer is a convenient way to parallelize image normalization. The lambda layer will also ensure that the model will normalize input images when making predictions in drive.py. And divide the pixel by 127.5 which gave a much better result than divide by 255 from try and error steps then minus 1, yield new value between (-1 to 1) (code line 68). 
+The model includes RELU layers to introduce nonlinearity (`model.py` line [70 to 81](model.py#L70-L81) ), and the data is normalized in the model using a Keras lambda layer, a lambda layer is a convenient way to parallelize image normalization. The lambda layer will also ensure that the model will normalize input images when making predictions in drive.py. And divide the pixel by 127.5 which gave a much better result than divide by 255 from try and error steps then minus 1, yield new value between (-1 to 1) (`model.py` line [68](model.py#L68) ). 
 <img src="./examples/nVidia_model.png?raw=true" width="600px">
 
 ```sh
@@ -132,12 +132,11 @@ ________________________________________________________________________________
 ```
 #### 2. Attempts to reduce overfitting in the model ####
 
-The model contains dropout layers in order to reduce overfitting (model.py lines 78, lines 82). 
-The model was trained and validated on different data sets to ensure that the model was not overfitting (code line 66). The model was tested by running it through the simulator and ensuring that the vehicle could stay on the track.
+The model contains dropout layers in order to reduce overfitting (`model.py` line [78](model.py#L78) , line [82](model.py#L82)). The model was trained and validated on different data sets to ensure that the model was not overfitting (`model.py` line [66](model.py#L66)). The model was tested by running it through the simulator and ensuring that the vehicle could stay on the track.
 
 #### 3. Model parameter tuning ####
 
-The model used Adam optimiser to control learning rate = 1e-04 (model.py line 84).
+The model used Adam optimiser to control learning rate = 1e-04 (`model.py` line [84](model.py#L84)).
 
 #### 4. Appropriate training data ####
 
